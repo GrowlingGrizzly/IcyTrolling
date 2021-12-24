@@ -20,6 +20,7 @@ public final class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
+
         plugin = this;
         prefix = ChatColor.translateAlternateColorCodes('&', getConfig().getString("messages.prefix"));
 
