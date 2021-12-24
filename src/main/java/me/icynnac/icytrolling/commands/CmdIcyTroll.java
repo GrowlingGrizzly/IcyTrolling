@@ -4,18 +4,16 @@ import me.icynnac.icytrolling.Main;
 import me.icynnac.icytrolling.utils.InvalidCommand;
 import me.icynnac.icytrolling.utils.ServerVersion;
 import net.md_5.bungee.api.chat.ClickEvent;
-import net.md_5.bungee.api.chat.ComponentBuilder;
-import net.md_5.bungee.api.chat.HoverEvent;
-import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginDescriptionFile;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static me.icynnac.icytrolling.utils.InteractiveMessage.sendInteractiveMessage;
 
 public class CmdIcyTroll implements TabExecutor {
     @Override
@@ -110,14 +108,6 @@ public class CmdIcyTroll implements TabExecutor {
         sendInteractiveMessage(sender, "§b§l/lag §3- Give someone my internet.", "/icytroll lag", ClickEvent.Action.RUN_COMMAND,  "Click to see /lag info.");
         if (ServerVersion.get.roundedFromServer().getId() > 8) sendInteractiveMessage(sender, "§b§l/levitate §3- Send someone slowly to the sun.", "/icytroll levitate", ClickEvent.Action.RUN_COMMAND,  "Click to see /levitate info.");
         if (ServerVersion.get.roundedFromServer().getId() > 10) sendInteractiveMessage(sender, "§b§l/pumpkin §3- Give someone a pumpkin hat!", "/icytroll pumpkin", ClickEvent.Action.RUN_COMMAND,  "Click to see /pumpkin info.");
-    }
-
-    void sendInteractiveMessage(CommandSender sender, String msg, String value, ClickEvent.Action clickAction, String hoverText) {
-        TextComponent message = new TextComponent(msg);
-        message.setClickEvent(new ClickEvent(clickAction, value));
-        message.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(hoverText).create()));
-        if (!(sender instanceof Player)) sender.sendMessage(msg);
-        else ((Player) sender).spigot().sendMessage(message);
     }
 
     @Override

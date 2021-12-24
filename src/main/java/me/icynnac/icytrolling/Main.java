@@ -2,6 +2,7 @@ package me.icynnac.icytrolling;
 
 import me.icynnac.icytrolling.commands.*;
 import me.icynnac.icytrolling.events.PlayerEvents;
+import me.icynnac.icytrolling.utils.UpdateChecker;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.inventory.ItemStack;
@@ -32,6 +33,7 @@ public final class Main extends JavaPlugin {
         getCommand("demo").setPermissionMessage("§cno.");
         getCommand("burn").setPermissionMessage("§cno.");
         getCommand("drop").setPermissionMessage("§cno.");
+        getCommand("scam").setPermissionMessage("§cno.");
         getCommand("lag").setPermissionMessage("§cno.");
 
         getCommand("levitate").setExecutor(new CmdLevitate());
@@ -42,10 +44,16 @@ public final class Main extends JavaPlugin {
         getCommand("demo").setExecutor(new CmdDemo());
         getCommand("burn").setExecutor(new CmdBurn());
         getCommand("drop").setExecutor(new CmdDrop());
+        getCommand("scam").setExecutor(new CmdScam());
         getCommand("lag").setExecutor(new CmdLag());
 
         saveDefaultConfig();
 
+        new UpdateChecker(this, 98539).getVersion(version -> {
+            if (!this.getDescription().getVersion().equalsIgnoreCase(version))
+                Bukkit.getConsoleSender().sendMessage("§a§lIcy§3§lTrolling §8§l>> §eThere's a new version available! Head to the spigot page (/icytroll info) to get the latest version.");
+            else Bukkit.getConsoleSender().sendMessage("§a§lIcy§3§lTrolling §8§l>> §aYou're on the latest version.");
+        });
     }
 
     @Override

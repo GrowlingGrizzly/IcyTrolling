@@ -30,3 +30,6 @@ commands:
   demo:
     description: You should pay for Minecraft.
     permission: icytroll.demo
+  scam:
+    description: Hello your computer have virus
+    permission: icytroll.scam

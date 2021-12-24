@@ -15,7 +15,8 @@ public enum InvalidCommand {
     FLING(6),
     LAG(7),
     PUMPKIN(8),
-    CONFIG(9);
+    SCAM(9),
+    CONFIG(10);
 
     public final int id;
 
