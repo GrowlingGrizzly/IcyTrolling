@@ -1,0 +1,36 @@
+package me.icynnac.icytrolling.utils;
+
+import me.icynnac.icytrolling.Main;
+import org.bukkit.ChatColor;
+import org.bukkit.command.CommandSender;
+
+public enum InvalidCommand {
+    OUTDATED_VERSION(-1),
+    NO_PLAYER(0),
+    DEMO(1),
+    DROP(2),
+    EXPLODE(3),
+    FIRE(4),
+    LEVITATE(5),
+    FLING(6),
+    LAG(7),
+    PUMPKIN(8),
+    CONFIG(9);
+
+    public final int id;
+
+    InvalidCommand(int id) { this.id = id; }
+
+    public boolean sendMessage(CommandSender sender) {
+        StringBuilder sb = new StringBuilder(Main.prefix + " ");
+        String node = "";
+        if (id > 0) node = ("messages.invalid-cmd-" + this.toString().toLowerCase());
+        else if (id == 0) node = "messages.invalid-player";
+        else if (id == -1) node = "messages.outdated-version";
+        if (this.equals(DROP) && ServerVersion.get.roundedFromServer().getId() < 9)
+            node = "messages.invalid-cmd-drop-legacy";
+        sb.append(Main.plugin.getConfig().getString(node));
+        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', sb.toString()));
+        return true;
+    }
+}
